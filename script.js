@@ -7,7 +7,7 @@ const recipeCloseBtn = document.getElementById("recipe-close-btn");
 // event listeners
 
 searchBtn.addEventListener('click', getMealList);
-mealList.addEventListener('click',getMealRcipe)
+mealList.addEventListener('click', getMealRcipe)
 
 // get meal list that matches with the intgredients
 function getMealList() {
@@ -20,7 +20,7 @@ function getMealList() {
             let html = "";
             if (data.meals) {
                 data.meals.forEach(meal => {
-                   html += `
+                    html += `
                 <div class="meal-item" data-id="${meal.idMeal}">
                   <div class="meal-img">
                   <img src="${meal.strMealThumb}" alt="food">
@@ -34,20 +34,49 @@ function getMealList() {
                 `
                 });
                 mealList.classList.remove("notFound")
-            }else{
-                html="sorry, we didn't find any meal!"
-           mealList.classList.add('notFound')
+            } else {
+                html = "sorry, we didn't find any meal!"
+                mealList.classList.add('notFound')
             }
-            mealList.innerHTML=html;
+            mealList.innerHTML = html;
         });
 }
 
 
 // get recipe of the meal
-function getMealRcipe(e){
+function getMealRcipe(e) {
     e.preventDefault();
-   if(e.target.classList.contains('recipe-btn')){
-        let mealItem=e.target.parentElement.parentElement;
-        console.log(mealItem);
+    if (e.target.classList.contains('recipe-btn')) {
+        let mealItem = e.target.parentElement.parentElement;
+        // console.log(mealItem);
+        fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItem.dataset.id}`)
+            .then(response => response.json())
+            .then(data => {
+                mealRecipeModal(data.meals)
+                // console.log(data);
+            })
     }
+}
+
+// create a modal
+
+function mealRecipeModal(meal) {
+    console.log(meal);
+    meal = meal[0];
+    let html = `
+    <h2 class="recipe-title">${meal.strMeal}</h2>
+    <p class="recipe-category">${meal.strCategory}</p>
+    <div class="recipe-instruct">
+        <h3>Insteuctions:</h3>
+        <p>${meal.strInstructions}</p>
+    </div>
+    <div class="recipe-meal-img">
+     <img src="${meal.strMealThumb}" alt="">
+    </div>
+    <div class="recipe-link">
+    <a href="${meal.strYoutube}" target="_blank">Watch Video</a>
+    </div>
+    `;
+    mealDetailsContent.innerHTML=html;
+    mealDetailsContent.parentElement.classList.add('showRecipe');
 }
