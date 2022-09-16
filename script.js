@@ -7,7 +7,10 @@ const recipeCloseBtn = document.getElementById("recipe-close-btn");
 // event listeners
 
 searchBtn.addEventListener('click', getMealList);
-mealList.addEventListener('click', getMealRcipe)
+mealList.addEventListener('click', getMealRcipe);
+recipeCloseBtn.addEventListener('click',()=>{
+    mealDetailsContent.parentElement.classList.remove('showRecipe');
+})
 
 // get meal list that matches with the intgredients
 function getMealList() {
