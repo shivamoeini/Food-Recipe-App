@@ -181,20 +181,24 @@ body {
     height: 90%;
     overflow-y: scroll;
     display: none;
-    padding: 2rem 0;
+    padding: 2rem ;
 }
+.meal-details p{
+    /* text-align:left; */
+    font-size: 1.2rem;
 
+}
 .meal-details::-webkit-scrollbar {
-    width: 10%;
+    width: 8px;
 }
 
 .meal-details::-webkit-scrollbar-thumb {
-    background: #f0f0f0;
-    border-radius: 2rem;
-    -webkit-border-radius: 2rem;
-    -moz-border-radius: 2rem;
-    -ms-border-radius: 2rem;
-    -o-border-radius: 2rem;
+    background: #fcd99a;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
 }
 
 .recipe-close-btn {
