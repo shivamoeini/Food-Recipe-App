@@ -7,6 +7,7 @@ const recipeCloseBtn = document.getElementById("recipe-close-btn");
 // event listeners
 
 searchBtn.addEventListener('click', getMealList);
+mealList.addEventListener('click',getMealRcipe)
 
 // get meal list that matches with the intgredients
 function getMealList() {
@@ -32,10 +33,18 @@ function getMealList() {
                 
                 `
                 });
+                mealList.classList.remove("notFound")
             }else{
                 html="sorry, we didn't find any meal!"
            mealList.classList.add('notFound')
             }
             mealList.innerHTML=html;
         });
+}
+
+
+// get recipe of the meal
+function getMealRcipe(e){
+    e.preventDefault();
+    console.log(e.target);
 }
