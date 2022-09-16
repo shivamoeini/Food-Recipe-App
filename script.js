@@ -32,6 +32,8 @@ function getMealList() {
                 
                 `
                 });
+            }else{
+                html="sorry, we didn't find any meal!"
             }
             mealList.innerHTML=html;
         });
